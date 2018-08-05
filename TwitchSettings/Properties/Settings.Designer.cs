@@ -70,5 +70,29 @@ namespace TwitchSettings.Properties {
                 this["clientId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string status {
+            get {
+                return ((string)(this["status"]));
+            }
+            set {
+                this["status"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string game {
+            get {
+                return ((string)(this["game"]));
+            }
+            set {
+                this["game"] = value;
+            }
+        }
     }
 }

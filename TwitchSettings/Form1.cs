@@ -23,6 +23,8 @@ namespace TwitchSettings
             this.channelID.Text = Properties.Settings.Default["channelName"].ToString();
             this.authToken.Text = Properties.Settings.Default["authToken"].ToString();
             this.clientID.Text = Properties.Settings.Default["clientID"].ToString();
+            this.games.Text = Properties.Settings.Default["game"].ToString();
+            this.status.Text = Properties.Settings.Default["status"].ToString();
             this._getChannelId();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.CenterToScreen();
@@ -77,6 +79,9 @@ namespace TwitchSettings
                     //{ channel: { '" + this.status.Text + "', '" + this.games.Text + "' } }",
                     "application/json",
                     "PUT");
+                Properties.Settings.Default["status"] = this.status.Text;
+                Properties.Settings.Default["game"] = this.games.Text;
+                Properties.Settings.Default.Save();
                 MessageBox.Show("Success");
             }
         }
