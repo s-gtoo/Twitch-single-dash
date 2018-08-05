@@ -16,6 +16,7 @@ namespace TwitchSettings
     {
         public string channelID_returned;
         public bool saved = false;
+        public bool started = false;
         public Form1()
         {
             InitializeComponent();
@@ -73,6 +74,8 @@ namespace TwitchSettings
             }
             else
             {
+                this.started = true;
+                this.timer1.Start();
                 this.Request(
                     "https://api.twitch.tv/kraken/channels/" + this.channelID_returned,
                     "{\"channel\": {\"status\": \""+ this.status.Text + "\", \"game\": \"" + this.games.Text + "\"}}",
@@ -118,15 +121,17 @@ namespace TwitchSettings
                 }
             }
         }
-        private string Get(string uri)
+        private string Get(string uri,bool auth = true)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-            request.Accept = "application/vnd.twitchtv.v5+json";
-            request.PreAuthenticate = true;
-            request.Headers.Add("Authorization: OAuth " + this.authToken.Text);
-            request.Headers.Add("Client-ID: " + this.clientID.Text);
+            if (auth)
+            {
+                request.Accept = "application/vnd.twitchtv.v5+json";
+                request.PreAuthenticate = true;
+                request.Headers.Add("Authorization: OAuth " + this.authToken.Text);
+                request.Headers.Add("Client-ID: " + this.clientID.Text);
+            }
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream))
@@ -161,6 +166,20 @@ namespace TwitchSettings
         }
 
         private void channelID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            dynamic twichReturn = JsonConvert.DeserializeObject(this.Get("https://api.twitch.tv/kraken/streams?client_id=" + this.clientID.Text + "&channel=" + this.channelID.Text, false));
+            if(twichReturn._total > 0)
+            {
+                label7.Text = twichReturn.streams[0].viewers.ToString();
+            }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
