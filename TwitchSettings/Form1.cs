@@ -65,14 +65,6 @@ namespace TwitchSettings
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*
-            WebRequest request = WebRequest.Create("https://api.twitch.tv/kraken/channels/" + this.channelID_returned);
-            request.Method = "PUT";
-            request.Headers.Add("Accept: 'application/vnd.twitchtv.v5+json'");
-            request.Headers.Add("Authorization: 'OAuth " + this.authToken + "'");
-            request.Headers.Add("Client-ID: " + this.clientID);
-            request.
-            */
             if (!this.saved)
             {
                 MessageBox.Show("First, you have to set up the application");
@@ -86,42 +78,6 @@ namespace TwitchSettings
                     "application/json",
                     "PUT");
                 MessageBox.Show("Success");
-                /*
-                    ("https://api.twitch.tv/kraken/users?login=" + this.channelID);
-                WebRequest request = WebRequest.Create("https://api.twitch.tv/kraken/channels/" + this.channelID_returned);
-                // Set the Method property of the request to POST.  
-                request.Method = "PUT";
-
-                request.Headers.Add("Accept: 'application/vnd.twitchtv.v5+json'");
-                request.Headers.Add("Authorization: 'OAuth " + this.authToken + "'");
-                request.Headers.Add("Client-ID: " + this.clientID);
-                // Create POST data and convert it to a byte array.  
-                string postData = "{ channel: { " + this.status.ToString() + ", " + this.games.ToString() + " } }";
-                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-                request.ContentLength = byteArray.Length;
-                // Get the request stream.  
-                Stream dataStream = request.GetRequestStream();
-                // Write the data to the request stream.  
-                dataStream.Write(byteArray, 0, byteArray.Length);
-                // Close the Stream object.  
-                dataStream.Close();
-                // Get the response.  
-                WebResponse response = request.GetResponse();
-                // Display the status.  
-                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-                // Get the stream containing content returned by the server.  
-                dataStream = response.GetResponseStream();
-                // Open the stream using a StreamReader for easy access.  
-                StreamReader reader = new StreamReader(dataStream);
-                // Read the content.  
-                string responseFromServer = reader.ReadToEnd();
-                // Display the content.  
-                MessageBox.Show(responseFromServer);
-                // Clean up the streams.  
-                reader.Close();
-                dataStream.Close();
-                response.Close();
-                */
             }
         }
         private bool _getChannelId()
@@ -155,37 +111,6 @@ namespace TwitchSettings
                 {
                     MessageBox.Show("Validation Success, Connected to Twitch API");
                 }
-                /*
-                WebRequest request = WebRequest.Create("https://api.twitch.tv/kraken/users?login=" + this.channelID);
-                // Set the Method property of the request to POST.  
-                request.Method = "GET";
-                // Create POST data and convert it to a byte array.  
-                string postData = "";
-                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-                request.ContentLength = byteArray.Length;
-                // Get the request stream.  
-                Stream dataStream = request.GetRequestStream();
-                // Write the data to the request stream.  
-                dataStream.Write(byteArray, 0, byteArray.Length);
-                // Close the Stream object.  
-                dataStream.Close();
-                // Get the response.  
-                WebResponse response = request.GetResponse();
-                // Display the status.  
-                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-                // Get the stream containing content returned by the server.  
-                dataStream = response.GetResponseStream();
-                // Open the stream using a StreamReader for easy access.  
-                StreamReader reader = new StreamReader(dataStream);
-                // Read the content.  
-                string responseFromServer = reader.ReadToEnd();
-                // Display the content.  
-                MessageBox.Show(responseFromServer);
-                // Clean up the streams.  
-                reader.Close();
-                dataStream.Close();
-                response.Close();
-                */
             }
         }
         private string Get(string uri)
